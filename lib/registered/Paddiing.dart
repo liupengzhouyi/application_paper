@@ -33,10 +33,6 @@ class MyApp extends StatelessWidget{
                         padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                         child: Image.network("https://i.loli.net/2020/01/22/8Xa1hoLzgjrDkJU.png",fit: BoxFit.cover,),
                       ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                        child: Image.network("https://i.loli.net/2020/01/22/8Xa1hoLzgjrDkJU.png",fit: BoxFit.cover,),
-                      ),
                     ]
                 )
               ),

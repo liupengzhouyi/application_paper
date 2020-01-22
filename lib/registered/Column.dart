@@ -43,16 +43,52 @@ class MyApp extends StatelessWidget{
           ),
         ),
         body: Container(
-          height: 600.00,
-          width: 500.00,
+          height: 300.00,
+          width: 450.00,
           color: Colors.black26,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: Column(
             children: <Widget>[
-              IconContainer(Icons.accessibility, color1: Colors.green,),
-              IconContainer(Icons.accessibility),
-              IconContainer(Icons.accessibility,color1: Colors.deepPurpleAccent,),
+              SizedBox(height: 10.00,),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(width: 10.00,),
+                  Expanded(
+                    flex: 1,
+                    child: IconContainer(Icons.accessibility, color1: Colors.green,),
+                  ),
+                  SizedBox(width: 10.00,),
+                  Expanded(
+                    flex: 2,
+                    child: IconContainer(Icons.accessibility),
+                  ),
+                  SizedBox(width: 10.00,),
+                  Expanded(
+                    flex: 1,
+                    child: IconContainer(Icons.accessibility,color1: Colors.deepPurpleAccent,),
+                  ),
+                  SizedBox(width: 10.00,),
+                ],
+              ),
+              SizedBox(height: 10.00,),
+              Row(
+                children: <Widget>[
+
+                  Expanded(
+                    flex: 1,
+                    child: IconContainer(Icons.accessibility, color1: Colors.green,),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: IconContainer(Icons.accessibility),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: IconContainer(Icons.accessibility,color1: Colors.deepPurpleAccent,),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
