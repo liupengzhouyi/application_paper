@@ -1,63 +1,47 @@
 
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(new MyApp());
-}
+void main() => runApp(MyApp1());
 
-
-class MyApp extends StatelessWidget{
-
+class MyApp1 extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-              "flutter Demo",
-          ),
-        ),
-        body: Center(
-          child: Container(
-            child: Text(
-                "xxxxdecoration: BoxDecoratid"
-                    "ecoration: BoxDecoratidecoration"
-                    ": BoxDecoratideco"
-                    "decoration: BoxDecorati"
-                    "ration: BoxDecoratidecoration: BoxDecorati",
-                textAlign: TextAlign.left,
-                // 超出设置
-                overflow: TextOverflow.fade,
-                // 最大显示行数
-                maxLines: 10,
-                textScaleFactor: 1,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.blue,
-                  fontWeight: FontWeight.w200,
-                  fontStyle: FontStyle.italic,
-                  decoration: TextDecoration.lineThrough,
-                  decorationColor: Colors.black87,
-                  decorationStyle: TextDecorationStyle.solid,
-                ),
-            ),
-            height: 300.00,
-            width: 300.00,
-            decoration: BoxDecoration(
-                color: Colors.amberAccent,
-                border: Border.all(
-                  color: Colors.black,
-                  width: 2.00,
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                ),
-            ),
-            // 内容到边框的距离
-            //padding: EdgeInsets.all(20),
-            padding: EdgeInsets.fromLTRB(10, 30, 10, 20)
-          ),
-        ),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: MyApp(),
+    );
+  }
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('123'),),
+      body: Container(
+        height: 303.00,
+        width: 303.00,
+        color: Colors.deepPurple,
+        child: Text("tcfvygbu"),
       ),
     );
   }
