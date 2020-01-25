@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //var url = 'https://learnku.com/articles/31768';
     Dio _dio = Dio();
     String result;
-    try {
+      try {
       var response = await _dio.post(url,data: {"string": "1667159125"});//2
       print(response.toString());
 
