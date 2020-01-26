@@ -24,13 +24,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var _ipAddress = 'Unknown';
 
+  var _data = {
+    "id": 0,
+    "passwordvalue": 123456,
+    "studentsid": "1667159125"
+  };
   _getIPAddress() async {//1
-    var url = 'http://123.56.167.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/studentsLanding/find';
+    var url = 'http://123.56.167.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/studentsLanding/landing';
     //var url = 'https://learnku.com/articles/31768';
     Dio _dio = Dio();
     String result;
       try {
-      var response = await _dio.post(url,data: {"string": "1667159125"});//2
+      var response = await _dio.post(url,data: this._data);//2
       print(response.toString());
 
       if (response.statusCode == HttpStatus.ok) {
