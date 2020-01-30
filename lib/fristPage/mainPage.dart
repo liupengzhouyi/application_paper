@@ -1,3 +1,4 @@
+import 'package:application_paper/fristPage/showTopic.dart';
 import 'package:flutter/material.dart';
 
 // 这里为入口函数
@@ -74,7 +75,7 @@ class _IndexState extends State<Index> with TickerProviderStateMixin{
 
     // 将我们 bottomBar 上面的按钮图标对应的页面存放起来，方便我们在点击的时候
     _pageList = <StatefulWidget>[
-      new HomePage(),
+      new ShowTopic(),
       new IdeaPage(),
       new MarketPage(),
     ];
@@ -118,32 +119,6 @@ class _IndexState extends State<Index> with TickerProviderStateMixin{
 
 }
 
-
-class HomePage extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() => new _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('首页'),
-          actions: <Widget>[
-            new Container()
-          ],
-        ),
-        body: new Center(
-          child: null,
-        ),
-      ),
-    );
-  }
-}
-
 class IdeaPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => new _IdeaPageState();
@@ -169,7 +144,6 @@ class _IdeaPageState extends State<IdeaPage> {
     );
   }
 }
-
 
 class MarketPage extends StatefulWidget{
   @override
