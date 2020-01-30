@@ -1,4 +1,5 @@
-import 'package:application_paper/fristPage/group.dart';
+import 'package:application_paper/fristPage/groupPage.dart';
+import 'package:application_paper/fristPage/myPage.dart';
 import 'package:application_paper/fristPage/showTopic.dart';
 import 'package:flutter/material.dart';
 
@@ -78,7 +79,7 @@ class _IndexState extends State<Index> with TickerProviderStateMixin{
     _pageList = <StatefulWidget>[
       new ShowTopic(),
       new Group(),
-      new MarketPage(),
+      new MyPage(),
     ];
     _currentPage = _pageList[_currentIndex];
   }
@@ -115,52 +116,6 @@ class _IndexState extends State<Index> with TickerProviderStateMixin{
         primarySwatch: Colors.blue,   // 设置主题颜色
       ),
 
-    );
-  }
-
-}
-
-class IdeaPage extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() => new _IdeaPageState();
-}
-class _IdeaPageState extends State<IdeaPage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('想法'),
-          actions: <Widget>[
-            new Container(
-              child: Text("123"),
-            )
-          ],
-        ),
-        body: new Center(
-          child: null,
-        ),
-      ),
-    );
-  }
-}
-
-class MarketPage extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() => new _MarketPageState();
-}
-class _MarketPageState extends State<MarketPage> {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-          appBar: new AppBar(
-            title: new Text('市场'),
-            // 后面的省略
-            // ......
-          )
-      ),
     );
   }
 
