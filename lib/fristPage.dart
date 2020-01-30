@@ -1,3 +1,4 @@
+import 'package:application_paper/fristPage/mainPage.dart';
 import 'package:flutter/material.dart';
 
 import 'main.dart';
@@ -25,14 +26,12 @@ class _MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin{
     _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 3000));
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     //上面两行代码表示初始化一个Animation控制器， vsync垂直同步，动画执行时间3000毫秒,然后我们设置一个Animation动画，使用上面设置的控制器
-
-
     //监听动画运行状态，当状态为completed时，动画执行结束，跳转首页
     _animation.addStatusListener((status){
       if(status == AnimationStatus.completed){
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context){
-              return MyHomePage(title: 'Flutter Demo Home Page');
+              return MyMainApp();
             }),
                 (route) => route == null
         );

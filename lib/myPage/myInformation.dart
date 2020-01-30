@@ -1,5 +1,6 @@
 
 
+import 'package:application_paper/myPage/personalInformation.dart';
 import 'package:flutter/material.dart';
 
 class MyInformation extends StatefulWidget {
@@ -25,6 +26,13 @@ class _MyInformationState extends State<MyInformation> {
                   leading:Icon(Icons.account_circle),
                   title: Text("个人信息", style: TextStyle(fontSize: 35, color:Colors.black),),
                   trailing: Icon(Icons.navigate_next),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => PersonalInformation(name: '刘鹏', number: '1667159125', phoneNumber: '14747219744',)
+                        )
+                    );
+                  },
                 ),
               ),
 

@@ -4,9 +4,9 @@ import 'package:application_paper/fristPage/showTopic.dart';
 import 'package:flutter/material.dart';
 
 // 这里为入口函数
-void main() => runApp(new MyApp());
+void main() => runApp(new MyMainApp());
 
-class MyApp extends StatelessWidget {
+class MyMainApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
