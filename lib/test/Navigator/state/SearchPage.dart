@@ -15,6 +15,15 @@ class SearchPage extends StatelessWidget {
       body: Text(
         '搜索页面内容'
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.file_upload),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
     );
   }
+
+
+
 }
