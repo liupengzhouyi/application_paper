@@ -1,6 +1,5 @@
 
-
-
+import 'package:application_paper/test/Navigator/state/ItemByLp.dart';
 import 'package:application_paper/test/Navigator/state/SearchPage.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +37,18 @@ class _FristState extends State<Frist> {
               Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (context) => SearchPage()
+                  )
+              );
+            },
+            color: Colors.amberAccent,
+            textTheme: ButtonTextTheme.primary,
+          ),
+          RaisedButton(
+            child: Text('点击进入搜索页面'),
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => ShowPage(id: '12',),
                   )
               );
             },
