@@ -54,6 +54,7 @@ class _TopicCradState extends State<TopicCrad> {
       margin: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
+          SizedBox(height: 10.00,),
           Row(
             children: <Widget>[
               Expanded(
@@ -156,7 +157,8 @@ class _TopicCradState extends State<TopicCrad> {
               ),
             ],
           ),
-          RaisedButton(
+          SizedBox(height: 10.00,),
+          /*RaisedButton(
             onPressed: () {
               Navigator.of(context).push(
                   MaterialPageRoute(
@@ -169,7 +171,7 @@ class _TopicCradState extends State<TopicCrad> {
               "详情",
               style: new TextStyle(color: Colors.white),
             ),
-          ),
+          ),*/
         ],
       ),
     );

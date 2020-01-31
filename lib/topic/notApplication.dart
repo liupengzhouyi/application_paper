@@ -1,5 +1,6 @@
 
 
+import 'package:application_paper/model/topicCard.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -85,9 +86,15 @@ class _NotApplicationState extends State<NotApplication> {
           child: Column(
             children: <Widget>[
               Container(
-                height: 500.00,
-                width: 300.00,
-                child: Text('详细信息'),
+                height: 400.00,
+                child: TopicCrad(
+                  id: Data['id'].toString(),
+                  papername: Data['papername'],
+                  teacherid: Data['teacherid'],
+                  releasedate: Data['releasedate'].toString(),
+                  isselect: Data['isselect'].toString(),
+                  url: Data['url'],
+                ),
               ),
               SizedBox(height: 10.00,),
               RaisedButton(

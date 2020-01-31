@@ -1,5 +1,6 @@
 
 import 'package:application_paper/model/topicCard.dart';
+import 'package:application_paper/model/topicCardPash.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -31,13 +32,15 @@ class _TopicListState extends State<TopicList> {
 
   List<Widget> _getList1() {
     var tempList = listData.map((value){
-      return TopicCrad(
-        id: value['id'].toString(),
-        papername: value['papername'],
-        teacherid: value['teacherid'],
-        releasedate: value['releasedate'].toString(),
-        isselect: value['isselect'].toString(),
-        url: value['url'],
+      return TopicCradPash(
+        topicCrad: TopicCrad(
+          id: value['id'].toString(),
+          papername: value['papername'],
+          teacherid: value['teacherid'],
+          releasedate: value['releasedate'].toString(),
+          isselect: value['isselect'].toString(),
+          url: value['url'],
+        ),
       );
     });
     return tempList.toList();
@@ -80,7 +83,7 @@ class _TopicListState extends State<TopicList> {
         body: Center(
           child: Container(
             child: ListView(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(5),
               children: _getList1(),
             ),
           ),
