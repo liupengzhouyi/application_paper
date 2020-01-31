@@ -1,7 +1,9 @@
 
 
+import 'package:application_paper/myPage/topicInformation.dart';
 import 'package:application_paper/myPage/personalInformation.dart';
 import 'package:flutter/material.dart';
+
 
 class MyInformation extends StatefulWidget {
 
@@ -42,9 +44,13 @@ class _MyInformationState extends State<MyInformation> {
                   leading:Icon(Icons.local_post_office),
                   title: Text("选题信息", style: TextStyle(fontSize: 35, color:Colors.black),),
                   trailing: Icon(Icons.navigate_next),
-                  /*onTap: () {
-                    //处理点击事件
-                  },*/
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => TopicInformation(title: '高校选题APP',teacher: '兰孝文',date: '2020',)
+                        ),
+                    );
+                  },
                 ),
               ),
             ],
