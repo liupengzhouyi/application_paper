@@ -12,7 +12,6 @@ class TopicList extends StatefulWidget {
 
 class _TopicListState extends State<TopicList> {
 
-
   List listData;
 
   Widget page;

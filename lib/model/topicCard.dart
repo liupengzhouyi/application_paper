@@ -1,5 +1,6 @@
 
 
+import 'package:application_paper/topic/ApplicationController.dart';
 import 'package:flutter/material.dart';
 
 class TopicCrad extends StatefulWidget {
@@ -35,6 +36,7 @@ class _TopicCradState extends State<TopicCrad> {
   String isselect = "";
 
   String isisselectStringType;
+  Color selectColor;
 
   _TopicCradState({this.id, this.papername, this.teacherid, this.releasedate,
     this.url, this.isselect});
@@ -43,8 +45,10 @@ class _TopicCradState extends State<TopicCrad> {
   Widget build(BuildContext context) {
     if (this.isselect == "1") {
       isisselectStringType = "已选择";
+      selectColor = Colors.red;
     } else {
       isisselectStringType = "未选择";
+      selectColor = Colors.green;
     }
     return Card(
       margin: EdgeInsets.all(10),
@@ -70,21 +74,9 @@ class _TopicCradState extends State<TopicCrad> {
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.lightGreen
-                  ),),
-              ),
-            ],
-          ),
-          SizedBox(height: 4.50,),
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text('发布日期'),
-              ),
-              SizedBox(width: 4.50,),
-              Expanded(
-                flex: 2,
-                child: Text('${this.releasedate}'),
+                  ),
+                ),
+
               ),
             ],
           ),
@@ -118,12 +110,35 @@ class _TopicCradState extends State<TopicCrad> {
             children: <Widget>[
               Expanded(
                 flex: 1,
-                child: Text('是否被选'),
+                child: Text(
+                  '是否被选',
+                  style: TextStyle(fontSize: 20.00),
+                ),
               ),
               SizedBox(width: 4.50,),
               Expanded(
                 flex: 2,
-                child: Text('${this.isisselectStringType}'),
+                child: Text(
+                  '${this.isisselectStringType}',
+                  style: TextStyle(
+                    color: selectColor,
+                    fontSize: 20.00,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 4.50,),
+          Row(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Text('发布日期'),
+              ),
+              SizedBox(width: 4.50,),
+              Expanded(
+                flex: 2,
+                child: Text('${this.releasedate}'),
               ),
             ],
           ),
@@ -140,6 +155,20 @@ class _TopicCradState extends State<TopicCrad> {
                 child: Text('${this.url}'),
               ),
             ],
+          ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ApplicationController(hasApplication: this.isselect, id: this.id,),
+                  )
+              );
+            },
+            color: Colors.red[300],
+            child: new Text(
+              "详情",
+              style: new TextStyle(color: Colors.white),
+            ),
           ),
         ],
       ),
