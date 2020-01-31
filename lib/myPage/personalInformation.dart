@@ -38,15 +38,24 @@ class _PersonalInformationState extends State<PersonalInformation> {
         children: <Widget>[
           Card(
             margin: EdgeInsets.all(10),
-            child: Text('姓名 ${this.name}'),
+            child: Container(
+              height: 40.00,
+              child: Text('姓名 ${this.name}'),
+            ),
           ),
           Card(
             margin: EdgeInsets.all(10),
-            child: Text('学号 ${this.number}'),
+            child: Container(
+              height: 40.00,
+              child: Text('学号 ${this.number}'),
+            ),
           ),
           Card(
             margin: EdgeInsets.all(10),
-            child: Text('联系方式 ${this.phoneNumber}'),
+            child: Container(
+              height: 40.00,
+              child: Text('联系方式 ${this.phoneNumber}'),
+            ),
           ),
         ],
       ),
