@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget{
                   ListTile(
                     title: Text("phonoe number: 14747219744", style: TextStyle(fontSize: 15),),
                     subtitle: Text("高级工程师", style: TextStyle(fontSize: 15),),
-                  )
+                  ),
                 ],
               ),
             ),

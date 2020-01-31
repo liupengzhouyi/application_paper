@@ -1,37 +1,58 @@
+
+
+
+
+
+import 'dart:convert' show json;
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 
-void main() => runApp(PageFirst());
+void main() => runApp(PalyNet());
 
-class PageFirst extends StatelessWidget {
+
+class PalyNet extends StatefulWidget {
+  @override
+  _PalyState createState() => _PalyState();
+}
+
+class _PalyState extends State<PalyNet> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Page one'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PageTwo())),
-          child: Text('下一页'),
-        ),
-      ),
+    getHttp();
+    return MaterialApp(
+      home: TabsPage(),
     );
+  }
+
+  getHttp() async {
+    try{
+      var response = await Dio().post(
+          'http://123.56.167.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/paper/selectAll',
+      );
+      print(response.data['whatYourDo']);
+      print(response.data['returnObject']);
+
+    }catch(e){
+      return null;
+    }
   }
 }
 
-class PageTwo extends StatelessWidget {
+class TabsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Page two'),
-      ),
       body: Center(
-        child: RaisedButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text('返回'),
-        ),
+        //child: Text("${getHttp()}"),
+        child: Text('http://123.56.167.84:8080/selection_of_colhttp://123.56.167'
+            '.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/pape'
+            'r/selectAlllege_graduatihttp://123.56.167.84:8080/selection_of_colle'
+            'ge_graduation_design-0.0.1-SNAPSHOT/paper/selectAllhttp://123.56.16'
+            '7.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/pa'
+            'per/selectAllon_design-0.0.1-SNAPSHOT/paper/selectAll'),
       ),
     );
   }
+
+
 }

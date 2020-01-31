@@ -1,11 +1,12 @@
 
+import 'package:application_paper/model/topicCard.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(new MyApp());
+  runApp(new MyApp111());
 }
 
-class MyApp extends StatelessWidget{
+class MyApp111 extends StatelessWidget{
 
   List<Widget> _getList1() {
     List listData = [
@@ -52,10 +53,18 @@ class MyApp extends StatelessWidget{
     ];
 
     var tempList = listData.map((value){
-      return ListTile(
+      /*return ListTile(
         leading: Icon(Icons.list),
         title: Text(value["papername"]),
         subtitle: Text(value["releasedate"]),
+      );*/
+      return TopicCrad(
+        id: value['id'].toString(),
+        papername: value['papername'],
+        teacherid: value['teacherid'],
+        releasedate: value['releasedate'].toString(),
+        isselect: value['isselect'].toString(),
+        url: value['url'],
       );
     });
     return tempList.toList();
@@ -93,16 +102,16 @@ class MyApp extends StatelessWidget{
         ),
         body: Center(
           child: Container(
-              /*child: ListView(
+              child: ListView(
                 padding: EdgeInsets.all(10),
                 children: _getList1(),
-              ),*/
-              child: ListView.builder(
+              ),
+              /*child: ListView.builder(
                   itemCount: list.length,
                   itemBuilder: (context, index) {
                     return this.list[index];
                   }
-              ),
+              ),*/
           ),
         ),
       ),
