@@ -31,5 +31,4 @@ class UserInformation {
     return 'UserInformation{userType: $userType, id: $id, password: $password, landing: $landing, registered: $registered}';
   }
 
-
 }

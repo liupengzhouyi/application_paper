@@ -12,23 +12,23 @@ class Lll extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Landing(),
+      home: StudentLanding(),
     );
   }
 
 }
 
 
-class Landing extends StatefulWidget {
+class StudentLanding extends StatefulWidget {
 
-  Landing({Key key}):super(key:key);
+  StudentLanding({Key key}):super(key:key);
 
   @override
   _LandingState createState() => _LandingState();
 
 }
 
-class _LandingState extends State<Landing> {
+class _LandingState extends State<StudentLanding> {
 
   //定义一个controller
   TextEditingController _uNameController = TextEditingController();
