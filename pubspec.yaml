@@ -12,14 +12,18 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   dio: 3.0.8
-  json_serializable: ^2.0.0
+
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
+
 flutter:
   uses-material-design: true
   assets:
     - assets/images/image01.png
+    - assets/data/userInformation.json
 

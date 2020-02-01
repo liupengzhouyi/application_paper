@@ -1,5 +1,7 @@
 
 
+import 'package:application_paper/myPage/myApplication.dart';
+import 'package:application_paper/myPage/systemApplication.dart';
 import 'package:application_paper/myPage/topicInformation.dart';
 import 'package:application_paper/myPage/personalInformation.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +55,39 @@ class _MyInformationState extends State<MyInformation> {
                   },
                 ),
               ),
+
+              Container(
+                height: 50.00,
+                child: ListTile(
+                  leading:Icon(Icons.announcement),
+                  title: Text("教师公告", style: TextStyle(fontSize: 35, color:Colors.black),),
+                  trailing: Icon(Icons.navigate_next),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => TeacherApplication()
+                        )
+                    );
+                  },
+                ),
+              ),
+
+              Container(
+                height: 50.00,
+                child: ListTile(
+                  leading:Icon(Icons.settings_applications),
+                  title: Text("系统公告", style: TextStyle(fontSize: 35, color:Colors.black),),
+                  trailing: Icon(Icons.navigate_next),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => SystemApplication()
+                        )
+                    );
+                  },
+                ),
+              ),
+
             ],
           ),
         ),

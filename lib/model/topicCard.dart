@@ -51,6 +51,7 @@ class _TopicCradState extends State<TopicCrad> {
       selectColor = Colors.green;
     }
     return Card(
+      color: Colors.lightBlueAccent,
       margin: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
