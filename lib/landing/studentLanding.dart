@@ -1,9 +1,12 @@
 
+import 'package:application_paper/fristPage/mainPage.dart';
+import 'package:application_paper/landing/StudentCheckLanding.dart';
+import 'package:application_paper/pojo/landing/StudentLanding/StudentLandingBean.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(Lll());
+void main() => runApp(StudentLand());
 
-class Lll extends StatelessWidget {
+class StudentLand extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +18,7 @@ class Lll extends StatelessWidget {
       home: StudentLanding(),
     );
   }
-
 }
-
 
 class StudentLanding extends StatefulWidget {
 
@@ -40,57 +41,148 @@ class _LandingState extends State<StudentLanding> {
 
   String _pass = "";
 
-  void _incrementCounter() {
-    setState(() {
-      this._name = this._uNameController.text;
-      this._pass = this._uPassController.text;
-      print(_name + " - " + _pass);
-    });
+  StudentCheckLanding studentCheckLanding = null;
+
+  Widget page;
+
+  FloatingActionButton floatingActionButton;
+
+  @override
+  void initState() {
+    page = this.inputInformation();
+    floatingActionButton = this.getFloatingActionButton();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child:Container(
-          width: 250.00,
-          child: Column(
-            children: <Widget>[
-              Container(
-                child: TextField(
-                  autofocus: true,
-                  controller: _uNameController,
-                  decoration: InputDecoration(
-                    labelText: "学号",
-                    hintText: "学号",
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                ),
-              ),
-              Container(
-                width: 250.00,
-                child: TextField(
-                  controller: _uPassController,
-                  decoration: InputDecoration(
-                    labelText: "密码",
-                    hintText: "您的登录密码",
-                    prefixIcon: Icon(Icons.lock),
-                  ),
-                  obscureText: true,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.file_upload),
-      ),
       appBar: AppBar(
         title: Text("学生登陆"),
       ),
+      body: page,
+      floatingActionButton: floatingActionButton,
+    );
+  }
+
+  void _incrementCounter() {
+    if (studentCheckLanding == null) {
+      setState(() {
+        this._name = this._uNameController.text;
+        this._pass = this._uPassController.text;
+        StudentLandingBean studentLandingBean = new StudentLandingBean(studentsid: this._name, passwordvalue: this._pass);
+        studentCheckLanding = new StudentCheckLanding(studentLandingBean: studentLandingBean);
+      });
+    } else {
+      if (studentCheckLanding.returnStudentLandingBean == null) {
+          setState(() {
+            page = noDataPage("正在校验登陆");
+            floatingActionButton = FloatingActionButton(
+              onPressed: () {},
+              tooltip: 'Increment',
+              child: Icon(Icons.autorenew),
+            );
+          });
+      } else {
+        if (studentCheckLanding.returnStudentLandingBean.key == true) {
+          setState(() {
+            page = noDataPage("登陆成功");
+            floatingActionButton = FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MyMainApp(),
+                    )
+                );
+              },
+              tooltip: 'Increment',
+              child: Icon(Icons.exit_to_app),
+            );
+          });
+        } else {
+          setState(() {
+            page = noDataPage("登陆失败");
+            floatingActionButton = FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => StudentLand(),
+                    )
+                );
+              },
+              tooltip: 'Increment',
+              child: Icon(Icons.exit_to_app),
+            );
+          });
+        }
+      }
+    }
+  }
+
+  Widget inputInformation() {
+    return Center(
+      child:Container(
+        width: 250.00,
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: TextField(
+                autofocus: true,
+                controller: _uNameController,
+                decoration: InputDecoration(
+                  labelText: "学号",
+                  hintText: "学号",
+                  prefixIcon: Icon(Icons.person),
+                ),
+              ),
+            ),
+            Container(
+              width: 250.00,
+              child: TextField(
+                controller: _uPassController,
+                decoration: InputDecoration(
+                  labelText: "密码",
+                  hintText: "您的登录密码",
+                  prefixIcon: Icon(Icons.lock),
+                ),
+                obscureText: true,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget noDataPage(String string) {
+    return Center(
+      child: Container(
+        width: 360.00,
+        height: 500.00,
+        child: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Image.asset("assets/images/1470137290773494.gif",fit: BoxFit.cover,),
+                SizedBox(height: 50,),
+                Text(string,
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Colors.redAccent,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  FloatingActionButton getFloatingActionButton() {
+    return FloatingActionButton(
+      onPressed: _incrementCounter,
+      tooltip: 'Increment',
+      child: Icon(Icons.file_upload),
     );
   }
 }

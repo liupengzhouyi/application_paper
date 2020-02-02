@@ -1,4 +1,4 @@
-import 'package:application_paper/fristPage/mainPage.dart';
+
 import 'package:flutter/material.dart';
 
 import 'main.dart';
@@ -31,7 +31,7 @@ class _MyHomeState extends State<MyHome> with SingleTickerProviderStateMixin{
       if(status == AnimationStatus.completed){
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context){
-              return MyMainApp();
+              return MyApp();
             }),
                 (route) => route == null
         );

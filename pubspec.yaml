@@ -25,5 +25,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/image01.png
+    - assets/images/1470137290773494.gif
     - assets/data/userInformation.json
 

@@ -1,6 +1,6 @@
 class TeacherLandingBean {
   int id;
-  int passwordvalue;
+  String passwordvalue;
   String studentsid;
 
   TeacherLandingBean({this.id, this.passwordvalue, this.studentsid});

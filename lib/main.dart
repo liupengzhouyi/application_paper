@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'package:application_paper/fristPage/mainPage.dart';
+import 'package:application_paper/landing/StudentCheckLanding.dart';
 import 'package:application_paper/landing/studentLanding.dart';
+import 'package:application_paper/pojo/landing/StudentLanding/StudentLandingBean.dart';
 import 'package:application_paper/pojo/userInformation.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -29,44 +32,97 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  UserInformation userInformation;
+  UserInformation userInformation = null;
 
+  StudentCheckLanding studentCheckLanding;
+
+  FloatingActionButton floatingActionButton;
   Widget page;
 
   @override
   void initState() {
     decodePerson();
+    page = noDataPage("自在校验登陆数据");
   }
 
   @override
   Widget build(BuildContext context) {
-    if(userInformation.landing == "0") {
-      page = StudentLanding();
-    } else if (userInformation.landing == "1") {
-      // 真的校验登陆信息
-
+    floatingActionButton = this.getFloatingActionButton();
+    if (userInformation == null) {
+      page = noDataPage("自在获取本地数据");
     } else {
-      page = noDataPage();
+      if(userInformation.landing == "0") {
+        page = StudentLanding();
+      } else if (userInformation.landing == "1") {
+        CheckLanding();
+      } else {
+        page = noDataPage("自在校验登陆数据");
+      }
     }
     return Scaffold(
       body: Container(
         child:page,
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.autorenew),
-        onPressed: () {
-          setState(() {
-            if(userInformation.landing == "0") {
-                page = StudentLanding();
-            } else {
-              page = noDataPage();
-            }
-          });
-          decodePerson();
-        },
-      ),
+      floatingActionButton: this.floatingActionButton,
     );
   }
+
+  // 真的校验登陆信息
+  int CheckLanding() {
+    // 构建对象
+    StudentLandingBean studentLandingBean = new StudentLandingBean(studentsid: userInformation.id, passwordvalue: userInformation.password);
+    if(studentCheckLanding == null) {
+      studentCheckLanding = new StudentCheckLanding(studentLandingBean: studentLandingBean);
+      setState(() {
+        page = noDataPage("自在校验登陆数据");
+      });
+    } else {
+      if(studentCheckLanding.returnStudentLandingBean == null) {
+        setState(() {
+          page = noDataPage("自在校验登陆数据");
+        });
+      } else {
+        if (studentCheckLanding.returnStudentLandingBean.key == true) {
+          setState(() {
+            page = noDataPage("登陆验证成功");
+            // 跳转首页
+            floatingActionButton = FloatingActionButton(
+              child: Icon(Icons.exit_to_app),
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MyMainApp(),
+                      )
+                  );
+                });
+                decodePerson();
+              },
+            );
+          });
+        } else {
+          setState(() {
+            page = noDataPage("登陆数据错误");
+            // 跳转首页
+            floatingActionButton = FloatingActionButton(
+              child: Icon(Icons.exit_to_app),
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => StudentLand(),
+                      )
+                  );
+                });
+                decodePerson();
+              },
+            );
+          });
+        }
+      }
+    }
+  }
+
 
   // 读取 assets 文件夹中的 person.json 文件
   Future<String> _loadPersonJson() async {
@@ -79,25 +135,48 @@ class _MyHomePageState extends State<MyHomePage> {
     String personJson = await _loadPersonJson();
     // 解析 json 字符串，返回的是 Map<String, dynamic> 类型
     final jsonMap = json.decode(personJson);
-    //print(jsonMap);
     userInformation = UserInformation.fromJson(jsonMap);
-    print(userInformation.toString());
-    // return userInformation;
   }
 
-  Widget noDataPage() {
+  Widget noDataPage(String string) {
     return Center(
       child: Container(
         width: 360.00,
-        height: 240.00,
-        child: Text(
-          "自在校验登陆数据",
-          style: TextStyle(
-            color: Colors.redAccent,
+        height: 500.00,
+        child: Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Image.asset("assets/images/1470137290773494.gif",fit: BoxFit.cover,),
+                SizedBox(height: 50,),
+                Text(string,
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Colors.redAccent,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+
+  Widget getFloatingActionButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.autorenew),
+      onPressed: () {
+        setState(() {
+          if(userInformation.landing == "0") {
+            page = StudentLanding();
+          } else {
+            page = noDataPage("自在校验登陆数据");
+          }
+        });
+      },
+    );
+  }
+
 }
 

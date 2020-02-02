@@ -1,5 +1,6 @@
 
 
+import 'package:application_paper/landing/studentLanding.dart';
 import 'package:application_paper/myPage/myApplication.dart';
 import 'package:application_paper/myPage/systemApplication.dart';
 import 'package:application_paper/myPage/topicInformation.dart';
@@ -82,6 +83,22 @@ class _MyInformationState extends State<MyInformation> {
                     Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) => SystemApplication()
+                        )
+                    );
+                  },
+                ),
+              ),
+
+              Container(
+                height: 50.00,
+                child: ListTile(
+                  leading:Icon(Icons.settings_applications),
+                  title: Text("切换用户", style: TextStyle(fontSize: 35, color:Colors.black),),
+                  trailing: Icon(Icons.navigate_next),
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => StudentLand(),
                         )
                     );
                   },

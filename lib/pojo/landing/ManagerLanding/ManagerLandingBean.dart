@@ -1,6 +1,6 @@
 class ManagerLandingBean {
   int id;
-  int passwordvalue;
+  String passwordvalue;
   String studentsid;
 
   ManagerLandingBean({this.id, this.passwordvalue, this.studentsid});
