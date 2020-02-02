@@ -1,9 +1,9 @@
 
 
 import 'package:application_paper/landing/LandingController.dart';
-import 'package:application_paper/landing/studentLanding.dart';
 import 'package:application_paper/myPage/myApplication.dart';
 import 'package:application_paper/myPage/systemApplication.dart';
+import 'package:application_paper/myPage/teacherApplication.dart';
 import 'package:application_paper/myPage/topicInformation.dart';
 import 'package:application_paper/myPage/personalInformation.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +37,22 @@ class _MyInformationState extends State<MyInformation> {
                         MaterialPageRoute(
                             builder: (context) => PersonalInformation(name: '刘鹏', number: '1667159125', phoneNumber: '14747219744',)
                         )
+                    );
+                  },
+                ),
+              ),
+
+              Container(
+                height: 50.00,
+                child: ListTile(
+                  leading:Icon(Icons.local_post_office),
+                  title: Text("我的申请", style: TextStyle(fontSize: 35, color:Colors.black),),
+                  trailing: Icon(Icons.navigate_next),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => MyApplication()
+                      ),
                     );
                   },
                 ),

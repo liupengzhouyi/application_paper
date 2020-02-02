@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SystemApplication extends StatefulWidget {
+class TeacherApplication extends StatefulWidget {
   @override
-  _SystemApplicationState createState() => _SystemApplicationState();
+  _TeacherApplicationState createState() => _TeacherApplicationState();
 }
 
-class _SystemApplicationState extends State<SystemApplication> {
+class _TeacherApplicationState extends State<TeacherApplication> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

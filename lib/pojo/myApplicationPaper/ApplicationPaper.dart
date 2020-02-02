@@ -43,31 +43,6 @@ class ApplicationPaper {
     }
   }
 
-  /*// _getLocalFile函数，获取本地文件目录
-  Future<File> _getLocalFile() async {
-    // 获取本地文档目录
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    print(dir);
-    // 返回本地文件目录
-    return new File('$dir/userInformation.txt');
-  }
-
-  void _readCounter() async {
-    try {
-      *//*
-       * 获取本地文件目录
-       * 关键字await表示等待操作完成
-       *//*
-      File file = await _getLocalFile();
-      // 从文件中读取变量作为字符串，一次全部读完存在内存里面
-      var contents = await file.readAsString();
-      print(contents);
-      var jsonMap = await json.decode(contents);
-      userInformation = UserInformation.fromJson(jsonMap);
-    } on FileSystemException {
-    }
-  }*/
-
 }
 
 
