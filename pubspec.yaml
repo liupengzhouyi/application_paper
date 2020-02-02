@@ -28,4 +28,7 @@ flutter:
     - assets/images/image01.png
     - assets/images/1470137290773494.gif
     - assets/data/userInformation.json
+    - assets/images/image02.png
+    - assets/images/image03.png
+    - assets/images/image04.png
 

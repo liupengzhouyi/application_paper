@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(ManagerLanding());
+void main() => runApp(ManagerLand());
 
-class ManagerLanding extends StatelessWidget {
+class ManagerLand extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,18 +11,18 @@ class ManagerLanding extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Landing(),
+      home: ManagerLanding(),
     );
   }
 }
 
-class Landing extends StatefulWidget {
-  Landing({Key key}):super(key:key);
+class ManagerLanding extends StatefulWidget {
+  ManagerLanding({Key key}):super(key:key);
   @override
-  _LandingState createState() => _LandingState();
+  _ManagerLandingState createState() => _ManagerLandingState();
 }
 
-class _LandingState extends State<Landing> {
+class _ManagerLandingState extends State<ManagerLanding> {
   //定义一个controller
   TextEditingController _uNameController = TextEditingController();
   //定义一个controller

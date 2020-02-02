@@ -25,6 +25,7 @@ class IconContainer extends StatelessWidget {
       child: Center(
         child: Icon(icon, size: size, color: color1,),
       ),
+
     );
   }
 
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget{
                   SizedBox(width: 10.00,),
                   Expanded(
                     flex: 1,
-                    child: IconContainer(Icons.accessibility, color1: Colors.green,),
+                    child: IconContainer(Icons.accessibility, color1: Colors.green, size: 30,),
                   ),
                   SizedBox(width: 10.00,),
                   Expanded(
@@ -80,7 +81,7 @@ class MyApp extends StatelessWidget{
                     child: IconContainer(Icons.accessibility, color1: Colors.green,),
                   ),
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: IconContainer(Icons.accessibility),
                   ),
                   Expanded(

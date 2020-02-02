@@ -226,5 +226,4 @@ class _LandingState extends State<StudentLanding> {
     await f.writeAsString('');
   }
 
-
 }

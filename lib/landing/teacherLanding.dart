@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 
-void main() => runApp(Lll());
+void main() => runApp(TeacherLand());
 
-class Lll extends StatelessWidget {
+class TeacherLand extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -12,23 +12,23 @@ class Lll extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Landing(),
+      home: TeacherLanding(),
     );
   }
 
 }
 
 
-class Landing extends StatefulWidget {
+class TeacherLanding extends StatefulWidget {
 
-  Landing({Key key}):super(key:key);
+  TeacherLanding({Key key}):super(key:key);
 
   @override
-  _LandingState createState() => _LandingState();
+  _TeacherLandingState createState() => _TeacherLandingState();
 
 }
 
-class _LandingState extends State<Landing> {
+class _TeacherLandingState extends State<TeacherLanding> {
 
   //定义一个controller
   TextEditingController _uNameController = TextEditingController();
