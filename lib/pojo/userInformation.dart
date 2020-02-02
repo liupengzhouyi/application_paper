@@ -1,9 +1,10 @@
 class UserInformation {
-  String userType;
-  String id;
-  String password;
-  String landing;
-  String registered;
+  String userType = "-1";
+  String id = "";
+  String password = "";
+  String landing = "0";
+  String registered = "0";
+
 
   UserInformation(
       {this.userType, this.id, this.password, this.landing, this.registered});
@@ -28,7 +29,7 @@ class UserInformation {
 
   @override
   String toString() {
-    return 'UserInformation{userType: $userType, id: $id, password: $password, landing: $landing, registered: $registered}';
+    return '{"userType": "$userType", "id": "$id", "password": "$password", "landing": "$landing", "registered": "$registered"}';
   }
 
 }

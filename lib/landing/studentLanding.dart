@@ -1,8 +1,14 @@
 
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:application_paper/fristPage/mainPage.dart';
 import 'package:application_paper/landing/StudentCheckLanding.dart';
 import 'package:application_paper/pojo/landing/StudentLanding/StudentLandingBean.dart';
+import 'package:application_paper/pojo/userInformation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() => runApp(StudentLand());
 
@@ -43,6 +49,8 @@ class _LandingState extends State<StudentLanding> {
 
   StudentCheckLanding studentCheckLanding = null;
 
+  StudentLandingBean studentLandingBean;
+
   Widget page;
 
   FloatingActionButton floatingActionButton;
@@ -64,12 +72,12 @@ class _LandingState extends State<StudentLanding> {
     );
   }
 
-  void _incrementCounter() {
+  void _incrementCounter() async {
     if (studentCheckLanding == null) {
       setState(() {
         this._name = this._uNameController.text;
         this._pass = this._uPassController.text;
-        StudentLandingBean studentLandingBean = new StudentLandingBean(studentsid: this._name, passwordvalue: this._pass);
+        studentLandingBean = new StudentLandingBean(studentsid: this._name, passwordvalue: this._pass);
         studentCheckLanding = new StudentCheckLanding(studentLandingBean: studentLandingBean);
       });
     } else {
@@ -86,6 +94,11 @@ class _LandingState extends State<StudentLanding> {
         if (studentCheckLanding.returnStudentLandingBean.key == true) {
           setState(() {
             page = noDataPage("登陆成功");
+            UserInformation userInformation = new UserInformation(userType: "1", id: studentLandingBean.studentsid, password: studentLandingBean.passwordvalue, landing: "1", registered: "1");
+            //清空原有数据
+            clearContent();
+            // 保存新的登陆信息
+            saveValue(userInformation);
             floatingActionButton = FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).push(
@@ -185,4 +198,33 @@ class _LandingState extends State<StudentLanding> {
       child: Icon(Icons.file_upload),
     );
   }
+
+  // _getLocalFile函数，获取本地文件目录
+  Future<File> _getLocalFile() async {
+    // 获取本地文档目录
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    // 返回本地文件目录
+    return new File('$dir/userInformation.txt');
+  }
+
+
+  void saveValue(UserInformation userInformation) async {
+    try {
+      File f = await _getLocalFile();
+      IOSink slink = f.openWrite(mode: FileMode.append);
+      slink.write('${userInformation.toString()}');
+      slink.close();
+    } catch (e) {
+      // 写入错误
+      print(e);
+    }
+  }
+
+  // 清空本地保存的文件
+  void clearContent() async {
+    File f = await _getLocalFile();
+    await f.writeAsString('');
+  }
+
+
 }

@@ -8,6 +8,9 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'base/getUserInformation.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  UserInformation userInformation = null;
+  UserInformation _userInformation = new UserInformation();
 
   StudentCheckLanding studentCheckLanding;
 
@@ -41,22 +44,40 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    decodePerson();
-    page = noDataPage("自在校验登陆数据");
+    //decodePerson();
+    page = noDataPage("正在校验登陆数据");
+    floatingActionButton = this.getFloatingActionButton();
+    /*
+     * 调用_readCounter函数，读取点击数
+     *  将点击数作为参数，创建一个函数
+     */
+    _readCounter();
   }
 
   @override
   Widget build(BuildContext context) {
-    floatingActionButton = this.getFloatingActionButton();
-    if (userInformation == null) {
-      page = noDataPage("自在获取本地数据");
+    if (_userInformation == null) {
+      page = noDataPage("正在获取本地数据");
     } else {
-      if(userInformation.landing == "0") {
-        page = StudentLanding();
-      } else if (userInformation.landing == "1") {
+      if(_userInformation.landing == "0") {
+        page = noDataPage("本地无登陆数据");
+        floatingActionButton = FloatingActionButton(
+          child: Icon(Icons.exit_to_app),
+          onPressed: () {
+            setState(() {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => StudentLand(),
+                  )
+              );
+            });
+            // decodePerson();
+          },
+        );
+      } else if (_userInformation.landing == "1") {
         CheckLanding();
       } else {
-        page = noDataPage("自在校验登陆数据");
+        page = noDataPage("正在校验登陆数据");
       }
     }
     return Scaffold(
@@ -70,16 +91,16 @@ class _MyHomePageState extends State<MyHomePage> {
   // 真的校验登陆信息
   int CheckLanding() {
     // 构建对象
-    StudentLandingBean studentLandingBean = new StudentLandingBean(studentsid: userInformation.id, passwordvalue: userInformation.password);
+    StudentLandingBean studentLandingBean = new StudentLandingBean(studentsid: _userInformation.id, passwordvalue: _userInformation.password);
     if(studentCheckLanding == null) {
       studentCheckLanding = new StudentCheckLanding(studentLandingBean: studentLandingBean);
       setState(() {
-        page = noDataPage("自在校验登陆数据");
+        page = noDataPage("正在校验登陆数据");
       });
     } else {
       if(studentCheckLanding.returnStudentLandingBean == null) {
         setState(() {
-          page = noDataPage("自在校验登陆数据");
+          page = noDataPage("正在校验登陆数据");
         });
       } else {
         if (studentCheckLanding.returnStudentLandingBean.key == true) {
@@ -114,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       )
                   );
                 });
-                decodePerson();
+                // decodePerson();
               },
             );
           });
@@ -135,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
     String personJson = await _loadPersonJson();
     // 解析 json 字符串，返回的是 Map<String, dynamic> 类型
     final jsonMap = json.decode(personJson);
-    userInformation = UserInformation.fromJson(jsonMap);
+    _userInformation = UserInformation.fromJson(jsonMap);
   }
 
   Widget noDataPage(String string) {
@@ -168,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Icon(Icons.autorenew),
       onPressed: () {
         setState(() {
-          if(userInformation.landing == "0") {
+          if(_userInformation.landing == "0") {
             page = StudentLanding();
           } else {
             page = noDataPage("自在校验登陆数据");
@@ -177,6 +198,62 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
+
+  // _getLocalFile函数，获取本地文件目录
+  Future<File> _getLocalFile() async {
+    // 获取本地文档目录
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    print(dir);
+    // 返回本地文件目录
+    return new File('$dir/userInformation.txt');
+  }
+
+  /*
+   * _readCounter函数，读取点击数
+   * 关键字async表示异步操作
+   * 返回值Future类型，表示延迟处理的对象
+   */
+  void _readCounter() async {
+    try {
+      /*
+       * 获取本地文件目录
+       * 关键字await表示等待操作完成
+       */
+      File file = await _getLocalFile();
+      var dir_bool = await file.exists();
+      if (dir_bool) {
+        print('true');
+      } else {
+        print('false');
+        file.create();
+        UserInformation userInformation = new UserInformation(landing: "0", registered: "0");
+        saveValue(userInformation);
+        this.initState();
+      }
+      // 从文件中读取变量作为字符串，一次全部读完存在内存里面
+      var contents = await file.readAsString();
+      print("=====---- :");
+      print(contents);
+      print("=====---- :");
+      var jsonMap = await json.decode(contents);
+      _userInformation = UserInformation.fromJson(jsonMap);
+      print("=====---- :" + _userInformation.toString());
+    } on FileSystemException {
+    }
+  }
+
+  void saveValue(UserInformation userInformation) async {
+    try {
+      File f = await _getLocalFile();
+      IOSink slink = f.openWrite(mode: FileMode.append);
+      slink.write('${userInformation.toString()}');
+      slink.close();
+    } catch (e) {
+      // 写入错误
+      print(e);
+    }
+  }
+
 
 }
 
