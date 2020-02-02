@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:application_paper/fristPage/mainPage.dart';
+import 'package:application_paper/landing/LandingController.dart';
 import 'package:application_paper/landing/StudentCheckLanding.dart';
 import 'package:application_paper/landing/studentLanding.dart';
 import 'package:application_paper/pojo/landing/StudentLanding/StudentLandingBean.dart';
@@ -131,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {
                   Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => StudentLand(),
+                        builder: (context) => LandController(),
                       )
                   );
                 });

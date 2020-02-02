@@ -1,5 +1,6 @@
 
 
+import 'package:application_paper/landing/LandingController.dart';
 import 'package:application_paper/landing/studentLanding.dart';
 import 'package:application_paper/myPage/myApplication.dart';
 import 'package:application_paper/myPage/systemApplication.dart';
@@ -98,7 +99,7 @@ class _MyInformationState extends State<MyInformation> {
                   onTap: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => StudentLand(),
+                            builder: (context) => LandController(),
                         )
                     );
                   },
