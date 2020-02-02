@@ -208,6 +208,7 @@ class _LandingState extends State<StudentLanding> {
   }
 
 
+  // 保存登陆数据
   void saveValue(UserInformation userInformation) async {
     try {
       File f = await _getLocalFile();
