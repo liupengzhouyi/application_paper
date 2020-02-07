@@ -1,5 +1,6 @@
 
 
+import 'package:application_paper/model/StudentApplication/applicationing.dart';
 import 'package:application_paper/model/topicCard.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -21,15 +22,40 @@ class _NotApplicationState extends State<NotApplication> {
   _NotApplicationState({this.id});
 
   Widget page;
+
   var Data;
+
+  FloatingActionButton floatingActionButton;
 
   @override
   void initState() {
-    page = noData();
+
   }
 
   @override
   Widget build(BuildContext context) {
+    if (Data == null) {
+      page = Scaffold(
+        body: Center(
+          child: Container(
+            child: Text('暂无数据'),
+          ),
+        ),
+        floatingActionButton:FloatingActionButton(
+          child: Icon(Icons.autorenew),
+          onPressed: () {
+            if (Data == null) {
+              print('null');
+            } else {
+              setState(() {
+                page = hasData(context);
+              });
+              print('has Data');
+            }
+          },
+        ),
+      );
+    }
     postHttp();
     return MaterialApp(
       title: '题目详细信息',
@@ -54,32 +80,7 @@ class _NotApplicationState extends State<NotApplication> {
     }
   }
 
-  Widget noData() {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Container(
-            child: Text('暂无数据'),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.autorenew),
-          onPressed: () {
-            if (Data == null) {
-              print('null');
-            } else {
-              setState(() {
-                page = hasData();
-              });
-              print('has Data');
-            }
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget hasData() {
+  Widget hasData(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Container(
@@ -99,8 +100,12 @@ class _NotApplicationState extends State<NotApplication> {
               SizedBox(height: 10.00,),
               RaisedButton(
                 child: Text("申请"),
-                onPressed: () => {
-
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => StudentApplicationPaper(paperID: this.id,)
+                      )
+                  );
                 },
               ),
             ],

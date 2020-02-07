@@ -25,4 +25,11 @@ class ReturnStudentApplicationPaperBean {
     data['why'] = this.why;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'ReturnStudentApplicationPaperBean{whatYourDo: $whatYourDo, number: $number, key: $key, returnObject: $returnObject, why: $why}';
+  }
+
+
 }
