@@ -1,14 +1,14 @@
-class ReturnStudentApplicationPaperrBean {
+class ReturnStudentApplicationPaperBean {
   String whatYourDo;
   int number;
   bool key;
   Null returnObject;
   String why;
 
-  ReturnStudentApplicationPaperrBean(
+  ReturnStudentApplicationPaperBean(
       {this.whatYourDo, this.number, this.key, this.returnObject, this.why});
 
-  ReturnStudentApplicationPaperrBean.fromJson(Map<String, dynamic> json) {
+  ReturnStudentApplicationPaperBean.fromJson(Map<String, dynamic> json) {
     whatYourDo = json['whatYourDo'];
     number = json['number'];
     key = json['key'];
@@ -25,11 +25,4 @@ class ReturnStudentApplicationPaperrBean {
     data['why'] = this.why;
     return data;
   }
-
-  @override
-  String toString() {
-    return 'ReturnStudentApplicationPaperrBean{whatYourDo: $whatYourDo, number: $number, key: $key, returnObject: $returnObject, why: $why}';
-  }
-
-
 }
