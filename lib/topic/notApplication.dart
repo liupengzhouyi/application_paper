@@ -99,7 +99,9 @@ class _NotApplicationState extends State<NotApplication> {
               SizedBox(height: 10.00,),
               RaisedButton(
                 child: Text("申请"),
-                onPressed: () => {},
+                onPressed: () => {
+
+                },
               ),
             ],
           ),
