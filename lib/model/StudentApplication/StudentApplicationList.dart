@@ -1,23 +1,25 @@
 
+
 import 'package:application_paper/model/StudentApplication/StudentApplicationCard.dart';
-import 'package:application_paper/pojo/myApplicationPaper/ReturnObject.dart';
+import 'package:application_paper/pojo/myApplicationPaper/studentSelect/ReturnObject.dart';
+// import 'package:application_paper/pojo/myApplicationPaper/ReturnObject.dart';
 import 'package:flutter/material.dart';
 
 class StudentApplicationList extends StatefulWidget {
 
-  List<Map<String, dynamic>> returnObject;
+  List<Map<String, dynamic>> listReturnObject;
 
-  StudentApplicationList({this.returnObject});
+  StudentApplicationList({this.listReturnObject});
 
   @override
-  _StudentApplicationListState createState() => _StudentApplicationListState(returnObject: returnObject);
+  _StudentApplicationListState createState() => _StudentApplicationListState(listReturnObject: listReturnObject);
 }
 
 class _StudentApplicationListState extends State<StudentApplicationList> {
 
-  List<Map<String, dynamic>> returnObject;
+  List<Map<String, dynamic>> listReturnObject;
 
-  _StudentApplicationListState({this.returnObject});
+  _StudentApplicationListState({this.listReturnObject});
 
   Widget page;
 
@@ -27,9 +29,9 @@ class _StudentApplicationListState extends State<StudentApplicationList> {
 
   @override
   void initState() {
+    list = new List<Widget>();
     _getList1();
-    page = this.noDataPage("自在构建序列");
-    print('--------:-------' + this.returnObject.toString());
+    print('--------:-------' + this.listReturnObject.toString());
   }
 
   @override
@@ -41,10 +43,17 @@ class _StudentApplicationListState extends State<StudentApplicationList> {
   }
 
   void _getList1() async {
-    for (var item in returnObject) {
-      ReturnObject tempReturnObject = new ReturnObject(paperid: item['paperid']);
-      StudentApplicationCard studentApplicationCard = new StudentApplicationCard(returnObject: tempReturnObject,);
+    for (var item in listReturnObject) {
+      ReturnObject returnObject = ReturnObject.fromJson(item);
+      print(returnObject.toJson().toString());
+      StudentApplicationCard studentApplicationCard = new StudentApplicationCard(returnObject: returnObject,);
       this.list.add(studentApplicationCard);
+    }
+    if(list.isEmpty) {
+      page = this.noDataPage("构建序列失败");
+    } else {
+      page = hasData();
+      // page = this.noDataPage("构建序列成功");
     }
   }
 
@@ -75,11 +84,8 @@ class _StudentApplicationListState extends State<StudentApplicationList> {
 
 
   Widget hasData() {
-    return Container(
-      child: ListView(
-        padding: EdgeInsets.all(5),
-        children: this.list,
-      ),
+    return Column(
+      children: this.list,
     );
   }
 

@@ -2,6 +2,7 @@
 import 'package:application_paper/model/StudentApplication/StudentApplicationList.dart';
 import 'package:application_paper/pojo/myApplicationPaper/ReturnApplicationPaperBean.dart';
 import 'package:application_paper/pojo/myApplicationPaper/StudentApplicationPaperBean.dart';
+import 'package:application_paper/pojo/myApplicationPaper/studentSelect/ReturnStudentApplicationPaper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,8 @@ class _StudentApplicationPageState extends State<StudentApplicationPage> {
 
   Widget page;
 
-  ReturnApplicationPaperBean returnApplicationPaperBean;
+  // 返回学生查询论文信息
+  ReturnStudentApplicationPaper returnStudentApplicationPaper;
 
   FloatingActionButton floatingActionButton;
 
@@ -50,9 +52,10 @@ class _StudentApplicationPageState extends State<StudentApplicationPage> {
       child: Icon(Icons.av_timer),
       onPressed: () {
         setState(() {
-          if (returnApplicationPaperBean != null) {
-            if (returnApplicationPaperBean.returnObject.length != 0) {
-              page = StudentApplicationList(returnObject: returnApplicationPaperBean.toJson()['returnObject'],);
+          if (returnStudentApplicationPaper != null) {
+            if (returnStudentApplicationPaper.returnObject.length != 0) {
+              page = StudentApplicationList(listReturnObject: returnStudentApplicationPaper.toJson()['returnObject'],);
+              this.floatingActionButton = null;
             } else {
               page = noDataPage("没有你的申请信息");
             }
@@ -90,15 +93,15 @@ class _StudentApplicationPageState extends State<StudentApplicationPage> {
   void postHttp() async {
     try{
       var response = await Dio().post(
-        'http://123.56.167.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/applicationPaper/getStudentAll',
+        'http://123.56.167.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/applicationPaper/studentGet',
         data: this.studentApplicationPaperBean.toJson(),
       );
+      this.returnStudentApplicationPaper = ReturnStudentApplicationPaper.fromJson(response.data);
       print(response);
-      this.returnApplicationPaperBean = ReturnApplicationPaperBean.fromJson(response.data);
-      print(returnApplicationPaperBean.toJson());
-      print(returnApplicationPaperBean.toJson()['returnObject']);
+      print(returnStudentApplicationPaper.toJson());
+      print(returnStudentApplicationPaper.toJson()['returnObject']);
     }catch(e){
-      returnApplicationPaperBean = null;
+      returnStudentApplicationPaper = null;
     }
   }
 

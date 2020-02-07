@@ -1,15 +1,35 @@
 
-
-import 'package:application_paper/pojo/myApplicationPaper/ReturnObject.dart';
-import 'package:application_paper/pojo/myApplicationPaper/paper/GetPaperInformationBean.dart';
 import 'package:application_paper/pojo/myApplicationPaper/paper/PaperIDBean.dart';
-import 'package:dio/dio.dart';
+import 'package:application_paper/pojo/myApplicationPaper/studentSelect/ReturnObject.dart';
 import 'package:flutter/material.dart';
+
+void main() => runApp(Test());
+
+class Test extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('tfvy'),
+        ),
+        body: StudentApplicationCard(
+          returnObject: ReturnObject(
+              isPass: 1,
+              paperID: 1,
+              paperName: "《123....................》",
+              teacherID: "2020001",
+              teachername: "yvgub"
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 class StudentApplicationCard extends StatefulWidget {
 
-  // 论文信息
-  GetPaperInformationBean getPaperInformationBean;
   // 申请信息
   ReturnObject returnObject;
 
@@ -21,8 +41,6 @@ class StudentApplicationCard extends StatefulWidget {
 
 class _StudentApplicationCardState extends State<StudentApplicationCard> {
 
-  // 论文信息
-  GetPaperInformationBean getPaperInformationBean;
   // 申请信息
   ReturnObject returnObject;
 
@@ -31,103 +49,77 @@ class _StudentApplicationCardState extends State<StudentApplicationCard> {
   PaperIDBean paperIDBean;
 
   String isPass = "";
+
   Color color ;
 
   Widget crad;
 
   @override
-  void initState() async {
-    this.paperIDBean = await new PaperIDBean(integer: "${returnObject.paperid}");
-    this.postHttp();
-    if(returnObject.ispass.toString() == "1") {
+  void initState() {
+    if(returnObject.isPass.toString() == "1") {
       isPass = "通过申请";
       color = Colors.green;
     } else {
       isPass = "未通过申请";
       color = Colors.red;
     }
+    this.createCrad();
   }
 
-  void createCrad() async {
-    crad = await Card(
-      color: Colors.lightBlueAccent,
+  void createCrad() {
+    crad = new Card(
+      color: Colors.white70,
       margin: EdgeInsets.all(10),
-      child: Column(
-        children: <Widget>[
-          SizedBox(height: 10.00,),
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text(
-                  '选题题目',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-              SizedBox(width: 4.50,),
-              Expanded(
-                flex: 2,
-                child: Text(
-                  '${this.getPaperInformationBean.returnObject.papername}',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black
-                  ),
-                ),
-
-              ),
-            ],
-          ),
-          SizedBox(height: 4.50,),
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text(
-                  '是否通过',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black
-                  ),),
-              ),
-              SizedBox(width: 4.50,),
-              Expanded(
-                flex: 2,
-                child: Text(
-                  '${this.isPass}',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: color,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 4.50,),
-        ],
-      ),
+      child: Container(
+        height: 150,
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 10.00,),
+            myMode("选题题目", Colors.black87, '${this.returnObject.paperName}', Colors.black, 30),
+            SizedBox(height: 4.50,),
+            myMode("是否通过", Colors.black, '${this.isPass}', color, 30),
+            SizedBox(height: 4.50,),
+            myMode("导师姓名", Colors.black, '${this.returnObject.teachername}', Colors.black, 30),
+          ],
+        ),
+      )
     );
   }
+
   @override
   Widget build(BuildContext context) {
-    this.createCrad();
-    return crad;
+    return Center(
+      child: crad,
+    );
   }
 
-  void postHttp() async {
-    try{
-      var response = await Dio().post(
-        'http://123.56.167.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/paper/selectByID',
-        data: this.paperIDBean.toJson(),
-      );
-      getPaperInformationBean = GetPaperInformationBean.fromJson(response.data);
-      print(response);
-    }catch(e){
-      getPaperInformationBean = null;
-    }
+  Widget myMode(String t1, Color color1, String t2, Color color2, double size) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: Text(
+            " " + t1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: size,
+              color: color1,
+            ),
+          ),
+        ),
+        SizedBox(width: 4.50,),
+        Expanded(
+          flex: 2,
+          child: Text(
+            t2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                fontSize: size,
+                color: color2
+            ),
+          ),
+        ),
+      ],
+    );
   }
-
 }

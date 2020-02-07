@@ -1,18 +1,16 @@
+import 'package:application_paper/pojo/myApplicationPaper/studentSelect/ReturnObject.dart';
 
-// 论文申请信息全部信息
-import 'package:application_paper/pojo/myApplicationPaper/ReturnObject.dart';
-
-class ReturnApplicationPaperBean {
+class ReturnStudentApplicationPaper {
   String whatYourDo;
   int number;
   bool key;
   List<ReturnObject> returnObject;
-  String why;
+  Null why;
 
-  ReturnApplicationPaperBean(
+  ReturnStudentApplicationPaper(
       {this.whatYourDo, this.number, this.key, this.returnObject, this.why});
 
-  ReturnApplicationPaperBean.fromJson(Map<String, dynamic> json) {
+  ReturnStudentApplicationPaper.fromJson(Map<String, dynamic> json) {
     whatYourDo = json['whatYourDo'];
     number = json['number'];
     key = json['key'];
@@ -36,10 +34,5 @@ class ReturnApplicationPaperBean {
     data['why'] = this.why;
     return data;
   }
-
-  @override
-  String toString() {
-    return 'ReturnApplicationPaperBean{whatYourDo: $whatYourDo, number: $number, key: $key, returnObject: $returnObject, why: $why}';
-  }
-
 }
+
