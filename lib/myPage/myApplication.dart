@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:application_paper/myPage/getLocdeInformation.dart';
 import 'package:application_paper/myPage/studentApplication/StudentApplicationPage.dart';
+import 'package:application_paper/myPage/tacherApplication/TeacherApplicationPage.dart';
 import 'package:application_paper/pojo/userInformation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -76,7 +77,8 @@ class _MyApplicationState extends State<MyApplication> {
               page = StudentApplicationPage(studentId: userInformation.id,);
               floatingActionButton = null;
             } else if (userInformation.userType == "2"){
-              // page =
+              page = TeacherApplicationPage(teacherID: userInformation.id,);
+              floatingActionButton = null;
             } else {
               page = noDataPage("暂无数据");
             }
