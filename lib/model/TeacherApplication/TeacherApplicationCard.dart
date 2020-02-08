@@ -1,6 +1,4 @@
-
-import 'package:application_paper/pojo/myApplicationPaper/paper/PaperIDBean.dart';
-import 'package:application_paper/pojo/myApplicationPaper/studentSelect/ReturnObject.dart';
+import 'package:application_paper/pojo/teacher/ReturnTeacherApplicationPaperBean.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(Test());
@@ -13,13 +11,13 @@ class Test extends StatelessWidget {
         appBar: AppBar(
           title: Text('tfvy'),
         ),
-        body: StudentApplicationCard(
+        body: TeacherApplicationCard(
           returnObject: ReturnObject(
-              isPass: 1,
-              paperID: 1,
+              isPass: "0",
+              paperID: "1",
               paperName: "《123....................》",
-              teacherID: "2020001",
-              teachername: "yvgub"
+              studentNumber: "2020001",
+              studentName: "yvgub"
           ),
         ),
       ),
@@ -28,29 +26,27 @@ class Test extends StatelessWidget {
 }
 
 
-class StudentApplicationCard extends StatefulWidget {
+class TeacherApplicationCard extends StatefulWidget {
 
   // 申请信息
   ReturnObject returnObject;
 
-  StudentApplicationCard({this.returnObject});
+  TeacherApplicationCard({this.returnObject});
 
   @override
-  _StudentApplicationCardState createState() => _StudentApplicationCardState(returnObject: this.returnObject);
+  _TeacherApplicationCardState createState() => _TeacherApplicationCardState(returnObject: this.returnObject);
 }
 
-class _StudentApplicationCardState extends State<StudentApplicationCard> {
+class _TeacherApplicationCardState extends State<TeacherApplicationCard> {
 
   // 申请信息
   ReturnObject returnObject;
 
-  _StudentApplicationCardState({this.returnObject});
-
-  PaperIDBean paperIDBean;
+  _TeacherApplicationCardState({this.returnObject});
 
   String isPass = "";
 
-  Color color ;
+  Color color;
 
   Widget card;
 
@@ -61,38 +57,40 @@ class _StudentApplicationCardState extends State<StudentApplicationCard> {
       color = Colors.green;
     } else if(returnObject.isPass.toString() == "-1") {
       isPass = "未通过申请";
-      color = Colors.blue;
+      color = Colors.red;
     } else if(returnObject.isPass.toString() == "0") {
       isPass = "未处理申请";
-      color = Colors.red;
+      color = Colors.blue;
     }
     this.createCrad();
-  }
-
-  void createCrad() {
-    card = new Card(
-      color: Colors.white70,
-      margin: EdgeInsets.all(10),
-      child: Container(
-        height: 150,
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 10.00,),
-            myMode("选题题目", Colors.black87, '${this.returnObject.paperName}', Colors.black, 30),
-            SizedBox(height: 4.50,),
-            myMode("是否通过", Colors.black, '${this.isPass}', color, 30),
-            SizedBox(height: 4.50,),
-            myMode("导师姓名", Colors.black, '${this.returnObject.teachername}', Colors.black, 30),
-          ],
-        ),
-      )
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: card,
+      child: this.card,
+    );
+  }
+
+  void createCrad() {
+    card = new Card(
+        color: Colors.white70,
+        margin: EdgeInsets.all(10),
+        child: Container(
+          height: 200,
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 10.00,),
+              myMode("选题题目", Colors.black87, '${this.returnObject.paperName}', Colors.black, 30),
+              SizedBox(height: 4.50,),
+              myMode("选题状态", Colors.black, '${this.isPass}', color, 30),
+              SizedBox(height: 4.50,),
+              myMode("学生学号", Colors.black, '${this.returnObject.studentNumber}', Colors.black, 30),
+              SizedBox(height: 4.50,),
+              myMode("学生姓名", Colors.black, '${this.returnObject.studentName}', Colors.black, 30),
+            ],
+          ),
+        )
     );
   }
 
@@ -107,6 +105,7 @@ class _StudentApplicationCardState extends State<StudentApplicationCard> {
             style: TextStyle(
               fontSize: size,
               color: color1,
+              backgroundColor: Colors.lime,
             ),
           ),
         ),
@@ -118,7 +117,8 @@ class _StudentApplicationCardState extends State<StudentApplicationCard> {
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
                 fontSize: size,
-                color: color2
+                color: color2,
+                // backgroundColor: Colors.greenAccent,
             ),
           ),
         ),

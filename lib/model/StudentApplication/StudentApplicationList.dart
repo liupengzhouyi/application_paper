@@ -82,7 +82,6 @@ class _StudentApplicationListState extends State<StudentApplicationList> {
     );
   }
 
-
   Widget hasData() {
     return ListView(
       children: this.list,

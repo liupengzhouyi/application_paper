@@ -12,4 +12,10 @@ class TeacherApplicationPaperBean {
     data['string'] = this.string;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'TeacherApplicationPaperBean{string: $string}';
+  }
+
 }
