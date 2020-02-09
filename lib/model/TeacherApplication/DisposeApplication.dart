@@ -145,6 +145,7 @@ class _DisposeApplicatonState extends State<DisposeApplicaton> {
                         width: 60,
                         height: 40,
                         child: FlatButton(
+
                           //为什么要设置左右padding，因为如果不设置，那么会挤压文字空间
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           //文字颜色
@@ -155,6 +156,10 @@ class _DisposeApplicatonState extends State<DisposeApplicaton> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4),
                           ),
+                          child: Text(
+                            '拒绝',
+                            style: TextStyle(fontSize: 14),
+                          ),
                           //如果使用FlatButton，必须初始化onPressed这个方法
                           onPressed: () {
                             setState(() {
@@ -164,10 +169,6 @@ class _DisposeApplicatonState extends State<DisposeApplicaton> {
                               postHttp3();
                             });
                           },
-                          child: Text(
-                            '拒绝',
-                            style: TextStyle(fontSize: 14),
-                          ),
                           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
                       )

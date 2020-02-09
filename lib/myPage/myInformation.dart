@@ -35,7 +35,7 @@ class _MyInformationState extends State<MyInformation> {
                   onTap: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => PersonalInformation(name: '刘鹏', number: '1667159125', phoneNumber: '14747219744',)
+                            builder: (context) => PersonalInformation()
                         )
                     );
                   },
