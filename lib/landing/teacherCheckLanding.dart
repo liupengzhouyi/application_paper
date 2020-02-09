@@ -22,8 +22,10 @@ class TeacherCheckLanding {
         'http://123.56.167.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/teachersLanding/landing',
         data: this.teacherLandingBean.toJson(),
       );
-      returnTeacherLandingBean = ReturnTeacherLandingBean .fromJson(response.data);
+      print('-1-1-1-1-1-1-1');
       print(response);
+      print('-1-1-1-1-1-1-1');
+      returnTeacherLandingBean = ReturnTeacherLandingBean.fromJson(response.data);
       print(returnTeacherLandingBean);
     }catch(e){
       returnTeacherLandingBean = null;

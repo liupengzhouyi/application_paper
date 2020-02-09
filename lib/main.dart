@@ -3,7 +3,9 @@ import 'package:application_paper/fristPage/mainPage.dart';
 import 'package:application_paper/landing/LandingController.dart';
 import 'package:application_paper/landing/StudentCheckLanding.dart';
 import 'package:application_paper/landing/studentLanding.dart';
+import 'package:application_paper/landing/teacherCheckLanding.dart';
 import 'package:application_paper/pojo/landing/StudentLanding/StudentLandingBean.dart';
+import 'package:application_paper/pojo/landing/TeacherLanding/TeacherLandingBean.dart';
 import 'package:application_paper/pojo/userInformation.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -40,7 +42,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   StudentCheckLanding studentCheckLanding;
 
+  TeacherCheckLanding teacherCheckLanding;
+
   FloatingActionButton floatingActionButton;
+
   Widget page;
 
   @override
@@ -76,7 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         );
       } else if (_userInformation.landing == "1") {
-        CheckLanding();
+        if (_userInformation.userType == "1") {
+          CheckLanding1();
+        } else if (_userInformation.userType == "2") {
+          CheckLanding2();
+        }
       } else {
         page = noDataPage("正在校验登陆数据");
       }
@@ -90,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // 真的校验登陆信息
-  int CheckLanding() {
+  int CheckLanding1() {
     // 构建对象
     StudentLandingBean studentLandingBean = new StudentLandingBean(studentsid: _userInformation.id, passwordvalue: _userInformation.password);
     if(studentCheckLanding == null) {
@@ -144,7 +153,61 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
   }
-
+  // 真的校验登陆信息
+  int CheckLanding2() {
+    // 构建对象
+    TeacherLandingBean teacherLandingBean = new TeacherLandingBean(teacherid: _userInformation.id, passwordvalue: _userInformation.password);
+    if(teacherCheckLanding == null) {
+      teacherCheckLanding = new TeacherCheckLanding(teacherLandingBean: teacherLandingBean);
+      setState(() {
+        page = noDataPage("正在校验登陆数据");
+      });
+    } else {
+      if(teacherCheckLanding.returnTeacherLandingBean == null) {
+        setState(() {
+          page = noDataPage("正在校验登陆数据");
+        });
+      } else {
+        if (teacherCheckLanding.returnTeacherLandingBean.key == true) {
+          setState(() {
+            page = noDataPage("登陆验证成功");
+            // 跳转首页
+            floatingActionButton = FloatingActionButton(
+              child: Icon(Icons.exit_to_app),
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MyMainApp(),
+                      )
+                  );
+                });
+                decodePerson();
+              },
+            );
+          });
+        } else {
+          setState(() {
+            page = noDataPage("登陆数据错误");
+            // 跳转首页
+            floatingActionButton = FloatingActionButton(
+              child: Icon(Icons.exit_to_app),
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => LandController(),
+                      )
+                  );
+                });
+                // decodePerson();
+              },
+            );
+          });
+        }
+      }
+    }
+  }
 
   // 读取 assets 文件夹中的 person.json 文件
   Future<String> _loadPersonJson() async {
@@ -192,7 +255,7 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           if(_userInformation.landing == "0") {
             page = StudentLanding();
-          } else {
+          } else if (_userInformation.landing == "1"){
             page = noDataPage("自在校验登陆数据");
           }
         });
@@ -254,7 +317,6 @@ class _MyHomePageState extends State<MyHomePage> {
       print(e);
     }
   }
-
 
 }
 
