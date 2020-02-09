@@ -1,6 +1,5 @@
 
 import 'package:application_paper/model/StudentApplication/StudentApplicationList.dart';
-import 'package:application_paper/pojo/myApplicationPaper/ReturnApplicationPaperBean.dart';
 import 'package:application_paper/pojo/myApplicationPaper/StudentApplicationPaperBean.dart';
 import 'package:application_paper/pojo/myApplicationPaper/studentSelect/ReturnStudentApplicationPaper.dart';
 import 'package:dio/dio.dart';

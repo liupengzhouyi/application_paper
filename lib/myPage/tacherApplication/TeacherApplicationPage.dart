@@ -1,5 +1,6 @@
-import 'package:application_paper/pojo/teacher/ReturnTeacherApplicationPaperBean.dart';
-import 'package:application_paper/pojo/teacher/TeacherApplicationPaperBean.dart';
+import 'package:application_paper/model/TeacherApplication/TeacherApplicationList.dart';
+import 'package:application_paper/pojo/myApplicationPaper/teacherSelect/ReturnTeacherApplicationPaperBean.dart';
+import 'package:application_paper/pojo/myApplicationPaper/teacherSelect/TeacherApplicationPaperBean.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -25,15 +26,15 @@ class _TeacherApplicationPageState extends State<TeacherApplicationPage> {
 
   FloatingActionButton floatingActionButton;
 
-  _TeacherApplicationPageState({this.teacherID}) {
-    this.teacherApplicationPaperBean = new TeacherApplicationPaperBean(string: teacherID);
-  }
+  _TeacherApplicationPageState({this.teacherID});
 
 
   @override
   void initState() {
+    this.teacherApplicationPaperBean = new TeacherApplicationPaperBean(string: teacherID);
+    print('${this.teacherApplicationPaperBean.toJson()}');
     this.postHttp();
-    page = this.noDataPage("正在查询");
+    page = this.noDataPage("正在跳转查询");
     this.floatingActionButton = this.getFloatingActionButton();
   }
 
@@ -52,7 +53,7 @@ class _TeacherApplicationPageState extends State<TeacherApplicationPage> {
         setState(() {
           if (this.returnTeacherApplicationPaperBean != null) {
             if (this.returnTeacherApplicationPaperBean.returnObject.length != 0) {
-              // page = StudentApplicationList(listReturnObject: returnStudentApplicationPaper.toJson()['returnObject'],);
+              page = TeacherApplicationList(listReturnObject: returnTeacherApplicationPaperBean.toJson()['returnObject'],);
               this.floatingActionButton = null;
             } else {
               page = noDataPage("没有你的申请信息");
@@ -91,11 +92,11 @@ class _TeacherApplicationPageState extends State<TeacherApplicationPage> {
   void postHttp() async {
     try{
       var response = await Dio().post(
-        'http://123.56.167.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/applicationPaper/studentGet',
+        'http://123.56.167.84:8080/selection_of_college_graduation_design-0.0.1-SNAPSHOT/applicationPaper/teacherGet',
         data: this.teacherApplicationPaperBean.toJson(),
       );
-      this.returnTeacherApplicationPaperBean = ReturnTeacherApplicationPaperBean.fromJson(response.data);
       print(response);
+      this.returnTeacherApplicationPaperBean = ReturnTeacherApplicationPaperBean.fromJson(response.data);
       print(returnTeacherApplicationPaperBean.toJson());
       print(returnTeacherApplicationPaperBean.toJson()['returnObject']);
     }catch(e){

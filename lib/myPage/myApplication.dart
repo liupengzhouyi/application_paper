@@ -77,6 +77,7 @@ class _MyApplicationState extends State<MyApplication> {
               page = StudentApplicationPage(studentId: userInformation.id,);
               floatingActionButton = null;
             } else if (userInformation.userType == "2"){
+              print('222222');
               page = TeacherApplicationPage(teacherID: userInformation.id,);
               floatingActionButton = null;
             } else {

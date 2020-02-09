@@ -1,4 +1,5 @@
-import 'package:application_paper/pojo/teacher/ReturnTeacherApplicationPaperBean.dart';
+
+import 'package:application_paper/pojo/myApplicationPaper/teacherSelect/ReturnObject.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(Test());
@@ -13,8 +14,8 @@ class Test extends StatelessWidget {
         ),
         body: TeacherApplicationCard(
           returnObject: ReturnObject(
-              isPass: "0",
-              paperID: "1",
+              isPass: 0,
+              paperID: 1,
               paperName: "《123....................》",
               studentNumber: "2020001",
               studentName: "yvgub"
