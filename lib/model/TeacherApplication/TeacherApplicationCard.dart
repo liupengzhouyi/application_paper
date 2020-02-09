@@ -15,6 +15,7 @@ class Test extends StatelessWidget {
         ),
         body: TeacherApplicationCard(
           returnObject: ReturnObject(
+              id: 0,
               isPass: 0,
               paperID: 1,
               paperName: "《123....................》",
@@ -59,15 +60,15 @@ class _TeacherApplicationCardState extends State<TeacherApplicationCard> {
     if(returnObject.isPass.toString() == "1") {
       isPass = "通过申请";
       color = Colors.green;
-      height = 160.00;
+      height = 180.00;
      } else if(returnObject.isPass.toString() == "-1") {
       isPass = "未通过申请";
       color = Colors.red;
-      height = 160.00;
+      height = 180.00;
     } else if(returnObject.isPass.toString() == "0") {
       isPass = "未处理申请";
       color = Colors.blue;
-      height = 210.00;
+      height = 230.00;
     }
     this.createCrad();
   }
@@ -104,7 +105,7 @@ class _TeacherApplicationCardState extends State<TeacherApplicationCard> {
                 // print('处理申请');
                 Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (context) => DisposeApplicaton()
+                        builder: (context) => DisposeApplicaton(id: returnObject.paperID, applicationID: returnObject.id,)
                     )
                 );
               },
@@ -136,7 +137,7 @@ class _TeacherApplicationCardState extends State<TeacherApplicationCard> {
               myMode("学生学号", Colors.black, '${this.returnObject.studentNumber}', Colors.black, 25),
               SizedBox(height: 4.50,),
               myMode("学生姓名", Colors.black, '${this.returnObject.studentName}', Colors.black, 25),
-              SizedBox(height: 4.50,),
+              SizedBox(height: 10,),
               getLink(),
             ],
           ),
