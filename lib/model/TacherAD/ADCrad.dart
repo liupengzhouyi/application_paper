@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
 
+// 这里为入口函数
+void main() => runApp(new MyApp());
 
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Flutter Demo',
+      home: Scaffold(
+        appBar: AppBar(title: Text('text'),),
+        body: TeacherADCard(),
+      ),     // 指定去加载 Index页面。
+    );
+  }
+}
 
 
 class TeacherADCard extends StatefulWidget {
@@ -15,11 +30,32 @@ class _TeacherADCardState extends State<TeacherADCard> {
     'authorid': "6969001",
     'datetime': "2020-01-16T00:00:00.000+0000",
     'title': "第一次系统公告",
-    'content': "欢迎大家来带这个垃圾学校，选了一个垃圾专业。"
+    'content': "第一次系统公告"
   };
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Card(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.album, color:Colors.lightBlueAccent,),
+              title: Text('${returnObject['title']}', style: TextStyle(fontSize: 30), overflow: TextOverflow.ellipsis,),
+              subtitle: Text('${getTime(returnObject['datetime'])}', style: TextStyle(fontSize: 20), overflow: TextOverflow.ellipsis,),
+              trailing: Icon(Icons.navigate_next),
+            ),
+          ],
+        ),
+    );
   }
+
+
+  String getTime(String time) {
+    String t = '';
+    for(int i=0;i<10;i++) {
+      t = t + time[i];
+    }
+    return t;
+  }
+  
 }

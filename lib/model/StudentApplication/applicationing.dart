@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:application_paper/pojo/student/ReturnStudentApplicationPaperBean.dart';
 import 'package:application_paper/pojo/student/StudentApplicationPaperBean.dart';
 import 'package:application_paper/pojo/userInformation.dart';
-import 'package:application_paper/service/student/applicationPaperByID.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -27,8 +26,6 @@ class _State extends State<StudentApplicationPaper> {
   UserInformation _userInformation;
 
   StudentApplicationPaperBean studentApplicationPaperBean;
-
-  StudentApplicationPaperByPaperID studentApplicationPaperByPaperID = null;
 
   ReturnStudentApplicationPaperBean returnStudentApplicationPaperBean = null;
 
