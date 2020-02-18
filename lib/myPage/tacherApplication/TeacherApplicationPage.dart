@@ -52,11 +52,16 @@ class _TeacherApplicationPageState extends State<TeacherApplicationPage> {
       onPressed: () {
         setState(() {
           if (this.returnTeacherApplicationPaperBean != null) {
-            if (this.returnTeacherApplicationPaperBean.returnObject.length != 0) {
-              page = TeacherApplicationList(listReturnObject: returnTeacherApplicationPaperBean.toJson()['returnObject'],);
+            if (this.returnTeacherApplicationPaperBean.key == false) {
+              page = noDataPage("没有你的申请信息");
               this.floatingActionButton = null;
             } else {
-              page = noDataPage("没有你的申请信息");
+              if (this.returnTeacherApplicationPaperBean.returnObject.length != 0) {
+                page = TeacherApplicationList(listReturnObject: returnTeacherApplicationPaperBean.toJson()['returnObject'],);
+                this.floatingActionButton = null;
+              } else {
+                page = noDataPage("没有你的申请信息");
+              }
             }
           }
         });
@@ -96,6 +101,10 @@ class _TeacherApplicationPageState extends State<TeacherApplicationPage> {
         data: this.teacherApplicationPaperBean.toJson(),
       );
       print(response);
+      if (response.data['returnObject'] == null) {
+        page = noDataPage("没有你的申请信息");
+        this.floatingActionButton = null;
+      }
       this.returnTeacherApplicationPaperBean = ReturnTeacherApplicationPaperBean.fromJson(response.data);
       print(returnTeacherApplicationPaperBean.toJson());
       print(returnTeacherApplicationPaperBean.toJson()['returnObject']);
