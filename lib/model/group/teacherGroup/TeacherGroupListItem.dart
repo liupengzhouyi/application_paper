@@ -1,3 +1,4 @@
+import 'package:application_paper/chat/ChatInformation.dart';
 import 'package:application_paper/pojo/teacher/teacherGetGroup/ReturnObject.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +32,13 @@ class _TeacherGroupListItemState extends State<TeacherGroupListItem> {
       ),
       title: Text('${returnObject.groupname}', style: TextStyle(fontSize: 30), overflow: TextOverflow.ellipsis,),
       trailing: Icon(Icons.navigate_next, color: Colors.red,),
+      onTap: () {
+        Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => GetChatInformation(groupID: this.returnObject.id, bodyID: this.returnObject.teacherid, groupName: this.returnObject.groupname, idtype: 2,),
+            )
+        );
+      },
     );
   }
 }

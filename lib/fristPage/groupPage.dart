@@ -20,10 +20,12 @@ class _GroupState extends State<Group> {
 
   Widget page;
 
+  FloatingActionButton floatingActionButton;
 
   @override
   void initState() {
     page = this.noDataPage("正在刷新数据");
+    floatingActionButton = this.getFloatingActionButton();
     this._readCounter();
   }
 
@@ -35,6 +37,7 @@ class _GroupState extends State<Group> {
           title: Text('群组信息'),
         ),
         body: page,
+        floatingActionButton: this.floatingActionButton,
       ),
     );
   }
@@ -85,21 +88,35 @@ class _GroupState extends State<Group> {
       var jsonMap = await json.decode(contents);
       print(jsonMap);
       _userInformation = UserInformation.fromJson(jsonMap);
-      if (this._userInformation != null) {
-        if (this._userInformation.userType == "1") {
-          // 学生
-          setState(() {
-            page = StudentGetGroup(studentId: _userInformation.id,);
-          });
-        }
-        if (this._userInformation.userType == "2") {
-          // 教师
-          setState(() {
-            page = TeacherGetGroup(teacherID: _userInformation.id,);
-          });
-        }
-      }
     } on FileSystemException {
     }
+  }
+
+  Widget getFloatingActionButton() {
+    return FloatingActionButton(
+      child: Icon(Icons.autorenew),
+      onPressed: () {
+        setState(() {
+          if (this._userInformation != null) {
+            if (this._userInformation.userType == "1") {
+              // 学生
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => StudentGetGroup(studentId: _userInformation.id,),
+                  )
+              );
+            }
+            if (this._userInformation.userType == "2") {
+              // 教师
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => TeacherGetGroup(teacherID: _userInformation.id,),
+                  )
+              );
+            }
+          }
+        });
+      },
+    );
   }
 }

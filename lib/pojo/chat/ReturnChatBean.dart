@@ -34,4 +34,11 @@ class ReturnChatBean {
     data['why'] = this.why;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'ReturnChatBean{whatYourDo: $whatYourDo, number: $number, key: $key, returnObject: $returnObject, why: $why}';
+  }
+
+
 }

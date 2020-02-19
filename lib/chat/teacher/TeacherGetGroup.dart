@@ -39,7 +39,10 @@ class _TeacherGetGroupState extends State<TeacherGetGroup> {
 
   @override
   Widget build(BuildContext context) {
-    return page;
+    return Scaffold(
+      appBar: AppBar(title: Text("群组信息"),),
+      body: page,
+    );
   }
 
   postHttp() async {
