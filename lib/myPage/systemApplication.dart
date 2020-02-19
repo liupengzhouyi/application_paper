@@ -28,7 +28,7 @@ class _SystemApplicationState extends State<SystemApplication> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('教师公告')),
+      appBar: AppBar(title: Text('系统公告')),
       body: page,
       floatingActionButton: floatingActionButton,
     );
