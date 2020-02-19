@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:application_paper/chat/student/StudentGetGroup.dart';
+import 'package:application_paper/chat/teacher/TeacherGetGroup.dart';
 import 'package:application_paper/pojo/userInformation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -82,6 +83,7 @@ class _GroupState extends State<Group> {
       // 从文件中读取变量作为字符串，一次全部读完存在内存里面
       var contents = await file.readAsString();
       var jsonMap = await json.decode(contents);
+      print(jsonMap);
       _userInformation = UserInformation.fromJson(jsonMap);
       if (this._userInformation != null) {
         if (this._userInformation.userType == "1") {
@@ -89,9 +91,12 @@ class _GroupState extends State<Group> {
           setState(() {
             page = StudentGetGroup(studentId: _userInformation.id,);
           });
-        } else if (this._userInformation.userType == "2") {
+        }
+        if (this._userInformation.userType == "2") {
           // 教师
-
+          setState(() {
+            page = TeacherGetGroup(teacherID: _userInformation.id,);
+          });
         }
       }
     } on FileSystemException {
