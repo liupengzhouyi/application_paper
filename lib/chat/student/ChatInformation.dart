@@ -16,7 +16,6 @@ class Lll extends StatelessWidget {
       home: GetChatInformation(groupID: 1, bodyID: '1667159125', groupName: '13',),
     );
   }
-
 }
 
 
@@ -74,6 +73,8 @@ class _GetChatInformationState extends State<GetChatInformation> {
         data: this.groupBean.toJson(),
       );
       print(response.data);
+
+
 
     }catch(e){
       return null;
