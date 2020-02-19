@@ -18,4 +18,11 @@ class ReturnObject {
     data['teacherid'] = this.teacherid;
     return data;
   }
+
+  @override
+  String toString() {
+    return 'ReturnObject{id: $id, groupname: $groupname, teacherid: $teacherid}';
+  }
+
+
 }
