@@ -78,7 +78,7 @@ class _StudentGetGroupState extends State<StudentGetGroup> {
         setState(() {
           this.list = new List<StudentGroupListItem>();
           for(ReturnObject returnObject in retrunStudentGetGroupBean.returnObject) {
-            StudentGroupListItem studentGroupListItem = new StudentGroupListItem(returnObject: returnObject,);
+            StudentGroupListItem studentGroupListItem = new StudentGroupListItem(returnObject: returnObject, studentID: this.studentId,);
             list.add(studentGroupListItem);
           }
           this.page = ListView(padding: EdgeInsets.all(10), children: this.list,);

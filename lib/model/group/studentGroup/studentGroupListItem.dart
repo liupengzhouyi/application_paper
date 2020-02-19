@@ -7,15 +7,19 @@ class StudentGroupListItem extends StatefulWidget {
 
   ReturnObject returnObject;
 
-  StudentGroupListItem({this.returnObject});
+  String studentID;
+
+  StudentGroupListItem({this.returnObject, this.studentID});
 
   @override
-  _StudentGroupListItemState createState() => _StudentGroupListItemState(returnObject: this.returnObject);
+  _StudentGroupListItemState createState() => _StudentGroupListItemState(returnObject: this.returnObject, studentID: this.studentID);
 }
 
 class _StudentGroupListItemState extends State<StudentGroupListItem> {
 
   ReturnObject returnObject;
+
+  String studentID;
 
   /*{
   "groupID": 1,
@@ -24,7 +28,7 @@ class _StudentGroupListItemState extends State<StudentGroupListItem> {
   "teacherID": "2020001"
   },*/
 
-  _StudentGroupListItemState({this.returnObject});
+  _StudentGroupListItemState({this.returnObject, this.studentID});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +38,11 @@ class _StudentGroupListItemState extends State<StudentGroupListItem> {
       ),
       title: Text('${returnObject.groupName}', style: TextStyle(fontSize: 30), overflow: TextOverflow.ellipsis,),
       trailing: Icon(Icons.navigate_next, color: Colors.red,),
+      onTap: () {
+        // 小组ID
+        // 我的编号
+        // 小组名称
+      },
     );
   }
 
